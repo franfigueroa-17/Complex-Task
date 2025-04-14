@@ -50,7 +50,7 @@ public class LoginTests extends BaseTest {
 
         HomePage homepage = loginPage.login(username, password);
         String logo = homepage.getLogoHomePage();
-        log.info("Logo recibido: " + logo);
+        log.info("Mensaje recibido: " + logo);
 
         assertEquals(logo, "Swag Labs");
     }

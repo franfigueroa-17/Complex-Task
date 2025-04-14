@@ -1,13 +1,18 @@
 package utils.driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import test.login.LoginTests;
 
 public class DriverSingleton {
     private static WebDriver driver;
+    private static final Logger log = LogManager.getLogger(DriverSingleton.class);
+
 
     private DriverSingleton(){}
 
@@ -15,19 +20,38 @@ public class DriverSingleton {
         if(null == driver) {
             switch (System.getProperty("browser", "chrome")) {
                 case "firefox": {
-                    WebDriverManager.firefoxdriver().setup();
-                    driver = new FirefoxDriver();
+                    try{
+                        WebDriverManager.firefoxdriver().setup();
+                        driver = new FirefoxDriver();
+                        log.info("Firefox Driver Setup Complete");
+                    } catch (Exception e){
+                        log.error("Firefox Driver Setup Failed");
+                        e.printStackTrace();
+                    }
                     break;
                 }
                 case "edge": {
-                    WebDriverManager.edgedriver().setup();
-                    driver = new EdgeDriver();
+                    try{
+                        WebDriverManager.edgedriver().setup();
+                        driver = new EdgeDriver();
+                        log.info("Edge Driver Setup Complete");
+                    } catch (Exception e){
+                        log.error("Edge Driver Setup Failed");
+                        e.printStackTrace();
+                    }
                     break;
 
                 }
                 default: {
-                    WebDriverManager.chromedriver().setup();
-                    driver = new ChromeDriver();
+
+                    try{
+                        WebDriverManager.chromedriver().setup();
+                        driver = new ChromeDriver();
+                        log.info("Chrome Driver Setup Complete");
+                    } catch (Exception e){
+                        log.error("Chrome Driver Setup Failed");
+                        e.printStackTrace();
+                    }
                     break;
 
                 }
@@ -40,5 +64,6 @@ public class DriverSingleton {
     public static void closeDriver(){
         driver.quit();
         driver = null;
+        log.info("Test Driver Closed");
     }
 }
