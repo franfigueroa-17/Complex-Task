@@ -1,8 +1,8 @@
-package base.login;
+package test.login;
 
-import base.BaseTest;
+import test.BaseTest;
 import org.testng.annotations.Test;
-import pages.HomePage;
+import models.HomePage;
 import utils.DataProviders;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,6 +15,7 @@ public class LoginTests extends BaseTest {
 
     @Test(dataProvider = "invalidCredentials", dataProviderClass = DataProviders.class)
     public void LoginWithEmptyCredentials(String username, String password) {
+
         log.info("Test: Login con credenciales vacías");
 
         loginPage.setUsername(username);

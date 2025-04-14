@@ -1,10 +1,10 @@
-package base;
+package test;
 
-import driver.DriverSingleton;
+import utils.driver.DriverSingleton;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pages.LoginPage;
+import models.LoginPage;
 
 public class BaseTest {
     protected LoginPage loginPage;
