@@ -6,7 +6,6 @@ import models.HomePage;
 import utils.data.DataProviders;
 import org.apache.logging.log4j.Logger;
 import utils.logger.LoggerSingleton;
-
 import static org.testng.Assert.*;
 
 public class LoginTests extends BaseTest {
@@ -32,12 +31,13 @@ public class LoginTests extends BaseTest {
         assertEquals(result, "Epic sadface: Username is required");
     }
 
-    @Test
-    public void LoginWithUsernameOnly() {
+    @Test(dataProvider = "validCredentials", dataProviderClass = DataProviders.class)
+    public void LoginWithUsernameOnly(String username, String password) {
         log.info("Test: Login solo con username");
 
-        String username = "username";
         loginPage.setUsername(username);
+        loginPage.setPassword(password);
+        loginPage.clearPassword();
         loginPage.clickLogin();
 
         String result = loginPage.getResult();
@@ -59,8 +59,11 @@ public class LoginTests extends BaseTest {
         log.info("Mensaje recibido: " + logo);
 
         if (!logo.equals("Swag Labs")) {
-            log.error("Resultado incorrecto. Se esperaba: 'Swag Labs', pero se obtuvo: '" + logo + "'");
+            log.error("Resultado incorrecto. Se esperaba: 'Swag Labs'");
         }
+
         assertEquals(logo, "Swag Labs");
     }
+
+
 }

@@ -9,7 +9,7 @@ public class LoginPage {
     private final WebDriver driver;
     private final By usernameField = By.id("user-name");
     private final By passwordField = By.id("password");
-    private final By loginButton = By.xpath("//input[@id='login-button']");
+    private final By loginButton = By.id("login-button");
     private final By result = By.tagName("h3");
 
 
@@ -27,6 +27,11 @@ public class LoginPage {
 
     public void clickLogin() {
         driver.findElement(loginButton).click();
+    }
+
+    public void clearPassword() {
+        driver.findElement(passwordField).
+                sendKeys(Keys.CONTROL + "a", Keys.DELETE);
     }
 
     public void clearFields() {

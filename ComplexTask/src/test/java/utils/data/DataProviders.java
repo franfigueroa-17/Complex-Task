@@ -12,8 +12,6 @@ public class DataProviders {
                 {"performance_glitch_user", "secret_sauce"},
                 {"error_user", "secret_sauce"},
                 {"visual_user", "secret_sauce"}
-
-
         };
     }
 
