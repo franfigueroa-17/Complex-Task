@@ -30,8 +30,10 @@ public class LoginPage {
     }
 
     public void clearFields() {
-        driver.findElement(usernameField).sendKeys(Keys.CONTROL + "a", Keys.DELETE);
-        driver.findElement(passwordField).sendKeys(Keys.CONTROL + "a", Keys.DELETE);
+        driver.findElement(usernameField).
+                sendKeys(Keys.CONTROL + "a", Keys.DELETE);
+        driver.findElement(passwordField).
+                sendKeys(Keys.CONTROL + "a", Keys.DELETE);
     }
 
     public String getResult() {

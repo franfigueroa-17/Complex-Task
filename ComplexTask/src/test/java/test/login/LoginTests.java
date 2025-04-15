@@ -3,15 +3,15 @@ package test.login;
 import test.BaseTest;
 import org.testng.annotations.Test;
 import models.HomePage;
-import utils.DataProviders;
-import org.apache.logging.log4j.LogManager;
+import utils.data.DataProviders;
 import org.apache.logging.log4j.Logger;
+import utils.logger.LoggerSingleton;
 
 import static org.testng.Assert.*;
 
 public class LoginTests extends BaseTest {
 
-    private static final Logger log = LogManager.getLogger(LoginTests.class);
+    private static final Logger log = LoggerSingleton.getLogger(LoginTests.class);
 
     @Test(dataProvider = "invalidCredentials", dataProviderClass = DataProviders.class)
     public void LoginWithEmptyCredentials(String username, String password) {
@@ -26,6 +26,9 @@ public class LoginTests extends BaseTest {
         String result = loginPage.getResult();
         log.info("Mensaje recibido: " + result);
 
+        if (!result.equals("Epic sadface: Username is required")) {
+            log.error("Resultado incorrecto. Se esperaba: 'Epic sadface: Username is required', pero se obtuvo: '" + result + "'");
+        }
         assertEquals(result, "Epic sadface: Username is required");
     }
 
@@ -40,6 +43,9 @@ public class LoginTests extends BaseTest {
         String result = loginPage.getResult();
         log.info("Mensaje recibido: " + result);
 
+        if (!result.equals("Epic sadface: Password is required")) {
+            log.error("Resultado incorrecto. Se esperaba: 'Epic sadface: Password is required', pero se obtuvo: '" + result + "'");
+        }
         assertEquals(result, "Epic sadface: Password is required");
     }
 
@@ -52,6 +58,9 @@ public class LoginTests extends BaseTest {
         String logo = homepage.getLogoHomePage();
         log.info("Mensaje recibido: " + logo);
 
+        if (!logo.equals("Swag Labs")) {
+            log.error("Resultado incorrecto. Se esperaba: 'Swag Labs', pero se obtuvo: '" + logo + "'");
+        }
         assertEquals(logo, "Swag Labs");
     }
 }

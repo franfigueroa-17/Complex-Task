@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Configuration status="WARN">
+    <Properties>
+        <Property name="COLOR_INFO">\u001b[32m</Property>      <!-- Verde -->
+        <Property name="COLOR_DEBUG">\u001b[36m</Property>     <!-- Cyan -->
+        <Property name="COLOR_ERROR">\u001b[31m</Property>     <!-- Rojo -->
+        <Property name="COLOR_WARN">\u001b[33m</Property>      <!-- Amarillo -->
+        <Property name="COLOR_FATAL">\u001b[35m</Property>     <!-- Magenta -->
+    </Properties>
     <Appenders>
         <Console name="Console" target="SYSTEM_OUT">
             <PatternLayout pattern="%d{HH:mm:ss} [%t] %-5level %logger{36} - %msg%n" />
