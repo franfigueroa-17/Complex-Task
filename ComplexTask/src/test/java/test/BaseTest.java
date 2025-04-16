@@ -2,22 +2,22 @@ package test;
 
 import utils.driver.DriverSingleton;
 import org.openqa.selenium.WebDriver;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import models.LoginPage;
 
 public class BaseTest {
     protected LoginPage loginPage;
-    String url = "https://www.saucedemo.com";
+    String URL = "https://www.saucedemo.com";
 
-    @BeforeMethod
+    @BeforeEach
     public void setUp() {
         WebDriver driver = DriverSingleton.getDriver();
-        driver.get(url);
+        driver.get(URL);
         loginPage = new LoginPage(driver);
     }
 
-    @AfterMethod
+    @AfterEach
     public void tearDown() {
         DriverSingleton.closeDriver();
     }

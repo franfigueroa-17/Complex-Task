@@ -1,26 +1,26 @@
 package utils.data;
 
-import org.testng.annotations.DataProvider;
+import org.junit.jupiter.params.provider.Arguments;
+
+import java.util.stream.Stream;
 
 public class DataProviders {
 
-    @DataProvider(name = "validCredentials")
-    public static Object[][] validUserData() {
-        return new Object[][] {
-                {"standard_user", "secret_sauce"},
-                {"problem_user", "secret_sauce"},
-                {"performance_glitch_user", "secret_sauce"},
-                {"error_user", "secret_sauce"},
-                {"visual_user", "secret_sauce"}
-        };
+    public static Stream<Arguments> validCredentials() {
+        return Stream.of(
+                Arguments.of("standard_user", "secret_sauce"),
+                Arguments.of("problem_user", "secret_sauce"),
+                Arguments.of("performance_glitch_user", "secret_sauce"),
+                Arguments.of("error_user", "secret_sauce"),
+                Arguments.of("visual_user", "secret_sauce")
+        );
     }
 
-    @DataProvider(name = "invalidCredentials")
-    public static Object[][] invalidUserData() {
-        return new Object[][] {
-                {"", ""},
-                {"jorge", "wrong_pass"},
-                {"locked_out_user", "secret_sauce"}
-        };
+    public static Stream<Arguments> invalidCredentials() {
+        return Stream.of(
+                Arguments.of("", ""),
+                Arguments.of("jorge", "wrong_pass"),
+                Arguments.of("locked_out_user", "secret_sauce")
+        );
     }
 }
