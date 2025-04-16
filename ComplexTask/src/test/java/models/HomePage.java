@@ -13,11 +13,7 @@ public class HomePage {
     }
 
     public String getLogoHomePage() {
-        try {
-            return driver.findElement(logoHomePage).getText();
-        } catch (NoSuchElementException e) {
-            return "Invalid Credentials for Login";
-        }
+        return driver.findElement(logoHomePage).getText();
     }
 
 }

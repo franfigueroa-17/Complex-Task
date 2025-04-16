@@ -1,7 +1,7 @@
 package utils.driver;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
-import org.apache.logging.log4j.Logger;
+import org.slf4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -17,61 +17,61 @@ public class DriverSingleton {
     public static WebDriver getDriver() {
         if(null == driver) {
             String browserType = System.getProperty("browser", "chrome");
-            log.info("Iniciando configuración del driver para: " + browserType);
+            log.info("Starting driver configuration for: " + browserType);
 
             try {
                 switch (browserType) {
                     case "firefox": {
-                        log.debug("Configurando Firefox WebDriver...");
+                        log.debug("Configuring Firefox WebDriver...");
                         WebDriverManager.firefoxdriver().setup();
                         driver = new FirefoxDriver();
-                        log.info("Firefox Driver configurado exitosamente");
+                        log.info("Firefox Driver successfully configured");
                         break;
                     }
                     case "edge": {
-                        log.debug("Configurando Edge WebDriver...");
+                        log.debug("Configuring Edge WebDriver...");
                         WebDriverManager.edgedriver().setup();
                         driver = new EdgeDriver();
-                        log.info("Edge Driver configurado exitosamente");
+                        log.info("Edge Driver successfully configured");
                         break;
                     }
                     default: {
-                        log.debug("Configurando Chrome WebDriver (navegador por defecto)...");
+                        log.debug("Configuring Chrome WebDriver (default browser)...");
                         WebDriverManager.chromedriver().setup();
                         driver = new ChromeDriver();
-                        log.info("Chrome Driver configurado exitosamente");
+                        log.info("Chrome Driver successfully configured");
                         break;
                     }
                 }
 
-                log.debug("Maximizando ventana del navegador");
+                log.debug("Maximizing browser window");
                 driver.manage().window().maximize();
-                log.info("Configuración del WebDriver completada");
+                log.info("WebDriver configuration completed");
 
             } catch (Exception e) {
-                log.error("Error al configurar el driver para " + browserType + ": " + e.getMessage());
-                log.debug("Detalles del error:", e);
-                throw new RuntimeException("No se pudo inicializar el WebDriver: " + e.getMessage(), e);
+                log.error("Error configuring driver for " + browserType + ": " + e.getMessage());
+                log.debug("Error details:", e);
+                throw new RuntimeException("Could not initialize WebDriver: " + e.getMessage(), e);
             }
         } else {
-            log.debug("Usando instancia existente del WebDriver");
+            log.debug("Using existing WebDriver instance");
         }
         return driver;
     }
 
     public static void closeDriver() {
         if (driver != null) {
-            log.debug("Cerrando sesión del WebDriver");
+            log.debug("Closing WebDriver session");
             try {
                 driver.quit();
-                log.info("WebDriver cerrado exitosamente");
+                log.info("WebDriver successfully closed");
             } catch (Exception e) {
-                log.error("Error al cerrar el WebDriver: " + e.getMessage());
+                log.error("Error closing WebDriver: " + e.getMessage());
             } finally {
                 driver = null;
             }
         } else {
-            log.debug("No hay instancia de WebDriver para cerrar");
+            log.debug("No WebDriver instance to close");
         }
     }
 }
